@@ -113,7 +113,7 @@ func (r *BackupStorageLocationReconciler) Reconcile(ctx context.Context, req ctr
 				location.Status.Phase = velerov1api.BackupStorageLocationPhaseUnavailable
 				location.Status.Message = err.Error()
 			} else {
-				log.Info("BackupStorageLocations is valid, marking as available")
+				log.Debug("BackupStorageLocations is valid, marking as available")
 				location.Status.Phase = velerov1api.BackupStorageLocationPhaseAvailable
 				location.Status.Message = ""
 			}
@@ -128,7 +128,7 @@ func (r *BackupStorageLocationReconciler) Reconcile(ctx context.Context, req ctr
 			return
 		}
 
-		log.Info("Validating BackupStorageLocation")
+		log.Debug("Validating BackupStorageLocation")
 		err = backupStore.IsValid()
 		if err != nil {
 			log.WithError(err).Error("fail to validate backup store")
